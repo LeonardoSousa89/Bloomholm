@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentação Técnica — Bloomholm</title>
+  <style>
+    :root {
+      --bg: #f4f7f3;
+      --panel: #ffffff;
+      --accent: #6aa84f;
+      --text: #2e3a28;
+      --muted: #6c7a6b;
+      --border: #dbe6d6;
+    }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 16px;
+    }
+    main {
+      max-width: 900px;
+      background: var(--panel);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      padding: 40px;
+      border: 1px solid var(--border);
+    }
+    h1 {
+      text-align: center;
+      color: var(--accent);
+      margin-top: 0;
+      font-size: 2.2rem;
+    }
+    h2 {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 4px;
+      margin-top: 40px;
+    }
+    h3 {
+      color: var(--text);
+      margin-top: 24px;
+      font-size: 1.1rem;
+    }
+    p, li {
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    code {
+      background: #eef5ec;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: #304b2d;
+    }
+    pre {
+      background: #eef5ec;
+      padding: 10px 14px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>📘 Documentação Técnica — Bloomholm&reg;</h1>
+    <p>
+      <strong>Bloomholm&reg;</strong> é um mini game web inspirado na categoria de games <em>MMORPG&reg;</em>,
+      porém com uma temática pacífica. O jogador coleta flores, troca por moedas
+      e participa de minijogos de memória para obter chapéus.
+    </p>
+
+    <h2>🧱 Estrutura de Arquivos</h2>
+    <ul>
+      <li><strong>index.html</strong> — Estrutura e layout geral.</li>
+      <li><strong>index.css</strong> — Estilo visual e responsividade.</li>
+      <li><strong>index.js</strong> — Lógica, renderização e interações do jogo.</li>
+    </ul>
+
+    <h2>📄 Estrutura HTML</h2>
+    <p>A página é composta pelos seguintes blocos principais:</p>
+    <ul>
+      <li><strong>Header</strong>: exibe o nome do jogo e botão de configurações.</li>
+      <li><strong>Canvas</strong>: área principal de renderização.</li>
+      <li><strong>Painel lateral</strong>: inventário, log e minijogo.</li>
+      <li><strong>Modais</strong>: configurações, comentários, manual e nome do jogador.</li>
+    </ul>
+
+    <h2>🎨 Estilos CSS</h2>
+    <h3>Paleta de Cores</h3>
+    <pre><code>:root {
+  --ui-bg: #f3f7ef;
+  --accent: #6aa84f;
+  --muted: #7b8a6f;
+  --panel: rgba(255,255,255,0.85);
+}</code></pre>
+
+    <h3>Layout Responsivo</h3>
+    <p>
+      A interface utiliza <code>flexbox</code> e adapta-se com
+      <code>@media (max-width: 900px)</code> para reorganizar o painel lateral
+      abaixo da área de jogo. Os botões direcionais aparecem apenas em dispositivos móveis.
+    </p>
+
+    <h2>⚙️ Lógica JavaScript</h2>
+    <ul>
+      <li><strong>Renderização:</strong> O mapa é desenhado via <code>Canvas API</code> com blocos de 32px.</li>
+      <li><strong>Movimentação:</strong> Controlada por teclas <code>WASD</code> ou setas, com detecção de colisão em bordas e obstáculos.</li>
+      <li><strong>Coleta e Troca:</strong> O jogador coleta flores e as troca por moedas ao interagir com o mercador.</li>
+      <li><strong>Minijogo:</strong> Cada tentativa custa 10 moedas. Ao vencer, o jogador ganha um chapéu e uma moeda extra.</li>
+      <li><strong>Inventário:</strong> Exibe chapéus colecionados e permite alternar visualmente entre eles.</li>
+      <li><strong>Logs:</strong> Cada evento do jogo é registrado na interface textual.</li>
+    </ul>
+
+    <h2>🧩 Modais</h2>
+    <p>
+      Os modais são implementados com <code>display: flex</code> e
+      <code>z-index: 50</code> para sobreposição. São utilizados para:
+    </p>
+    <ul>
+      <li>Solicitar o nome do jogador no início.</li>
+      <li>Exibir configurações.</li>
+      <li>Mostrar regras do jogo (manual).</li>
+      <li>Receber feedback dos jogadores.</li>
+    </ul>
+
+    <h2>📜 Funções-Chave</h2>
+    <ul>
+      <li><code>drawTile()</code> — desenha o cenário base.</li>
+      <li><code>drawPlayer()</code> e <code>drawMerchant()</code> — renderizam os personagens.</li>
+      <li><code>drawNames()</code> — exibe o nome “Jogador” e “Mercador” acima dos sprites.</li>
+      <li><code>attemptPick()</code> — coleta flores e faz a troca com o mercador.</li>
+      <li><code>handleMiniClick()</code> — lógica do minijogo de sequência.</li>
+      <li><code>giveCosmetic()</code> — adiciona chapéu ao inventário.</li>
+    </ul>
+
+    <h2>💡 Observações Técnicas</h2>
+    <ul>
+      <li>O canvas tem dimensões fixas de <code>640x480px</code>.</li>
+      <li>O jogador não atravessa bordas nem obstáculos.</li>
+      <li>Os controles móveis usam eventos <code>touchstart</code>.</li>
+      <li>Todos os modais são fecháveis clicando fora de suas áreas.</li>
+    </ul>
+
+    <footer>
+      <p>© 2026 Bloomholm Possui Todos Seus Direitos Reservados.</p>
+    </footer>
+  </main>
+</body>
+</html>
