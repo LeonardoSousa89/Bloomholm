@@ -194,6 +194,68 @@
         100% { transform: scale(0.95); opacity: 0.7; }
       }
 
+      /* === MODAL DE VERIFICAÇÃO === */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        animation: fadeIn 0.4s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .modal-content {
+        background: rgba(40, 55, 38, 0.95);
+        border: 2px solid rgba(106, 168, 79, 0.4);
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(106, 168, 79, 0.4);
+        max-width: 360px;
+        animation: pop 0.3s ease;
+      }
+
+      @keyframes pop {
+        from { transform: scale(0.9); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+
+      .modal-content h3 {
+        color: #bdf5a4;
+        margin-bottom: 20px;
+      }
+
+      .modal-content button {
+        margin: 10px;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .yes {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .no {
+        background: #6b2a2a;
+        color: #fff;
+      }
+
+      .modal-content button:hover {
+        transform: scale(1.05);
+      }
+
       @media (max-width: 600px) {
         header h1 { font-size: 1.8em; }
         main { padding: 20px 14px 100px; }
@@ -204,6 +266,15 @@
   </head>
 
   <body>
+    <!-- Modal de verificação -->
+    <div class="modal" id="accessModal">
+      <div class="modal-content" id="modalContent">
+        <h3>Você tem mais de 12 anos?</h3>
+        <button class="yes" id="btnYes">Sim</button>
+        <button class="no" id="btnNo">Não</button>
+      </div>
+    </div>
+
     <header>
       <h1>🌼 Bloomholm</h1>
       <p>Pequeno lar onde tudo floresce</p>
@@ -249,10 +320,10 @@
         <h2>💬 Comunidade</h2>
         <p>
           Compartilhe suas conquistas, descubra segredos e contribua para o
-          crescimento do mundo de Bloomholm. Entre para o nosso Discord e faça parte!
+          crescimento do mundo de Bloomholm. Entre para o nosso Discord e faça parte desta comunidade!
         </p>
         <a href="https://www.discord.com" target="_blank" class="cta">Comunidade Discord</a>
-        <div class="ad">[ Anúncio da comunidade / Parceiros ]</div>
+        <div class="ad">[ Espaço para anúncio 728×90 ]</div>
       </section>
     </main>
 
@@ -262,5 +333,31 @@
 
     <!-- CTA FIXO DE JOYSTICK -->
     <a href="/game/" class="cta-joystick" title="Jogar Bloomholm" aria-label="Jogar Bloomholm">🕹️</a>
+
+    <script>
+      const modal = document.getElementById("accessModal");
+      const modalContent = document.getElementById("modalContent");
+
+      document.body.style.overflow = "hidden";
+
+      document.getElementById("btnYes").addEventListener("click", () => {
+        modalContent.innerHTML = `
+          <h3>Você aceita os termos de uso?</h3>
+          <button class="yes" id="btnAccept">Sim</button>
+          <button class="no" id="btnDecline">Não</button>
+        `;
+        document.getElementById("btnAccept").addEventListener("click", () => {
+          modal.style.display = "none";
+          document.body.style.overflow = "auto";
+        });
+        document.getElementById("btnDecline").addEventListener("click", () => {
+          modalContent.innerHTML = "<h3>Acesso negado ❌<br>Você precisa aceitar os termos para continuar.</h3>";
+        });
+      });
+
+      document.getElementById("btnNo").addEventListener("click", () => {
+        modalContent.innerHTML = "<h3>Acesso negado ❌<br>Somente maiores de 12 anos podem acessar.</h3>";
+      });
+    </script>
   </body>
 </html>
