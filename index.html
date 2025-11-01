@@ -1,160 +1,209 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
-    />
-    <title>Bloomholm — Mini Game Responsivo</title>
-    <link rel="stylesheet" href="./style/index.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>🌼 Bloomholm — Jardim Eterno</title>
+
+    <style>
+      :root {
+        --ui-bg: #f3f7ef;
+        --accent: #6aa84f;
+        --muted: #7b8a6f;
+        --panel: rgba(255, 255, 255, 0.85);
+        --dark: #1e261c;
+        --txt: #e5f1e0;
+        --glow: 0 0 10px rgba(106,168,79,0.6);
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at center, #2a3c28 0%, #1b221a 80%);
+        color: var(--txt);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      header {
+        width: 100%;
+        text-align: center;
+        padding: 20px 10px;
+        background: rgba(50, 70, 45, 0.5);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        backdrop-filter: blur(6px);
+        box-shadow: inset 0 -2px 8px rgba(0,0,0,0.3);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.2em;
+        letter-spacing: 2px;
+        color: #b5f28c;
+        text-shadow: 0 0 10px #6aa84f;
+      }
+
+      header p {
+        margin: 5px 0 0;
+        color: var(--muted);
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        width: 100%;
+        max-width: 900px;
+        padding: 40px 20px 120px;
+      }
+
+      section {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 24px;
+        width: 100%;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform .2s ease, box-shadow .2s ease;
+      }
+
+      section:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 0 25px rgba(106,168,79,0.4);
+      }
+
+      h2 {
+        margin-top: 0;
+        font-size: 1.6em;
+        color: #bdf5a4;
+        text-shadow: var(--glow);
+      }
+
+      p {
+        color: #c7d9c0;
+        line-height: 1.5;
+        font-size: 1em;
+        max-width: 600px;
+      }
+
+      a.cta {
+        margin-top: 18px;
+        display: inline-block;
+        background: linear-gradient(180deg, var(--accent), #4c7a39);
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 12px 28px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(106,168,79,0.5);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      a.cta:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(138,210,102,0.8);
+      }
+
+      .ad {
+        width: 100%;
+        height: 90px;
+        margin-top: 16px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        background: rgba(0, 0, 0, 0.65);
+        border-top: 1px solid rgba(255,255,255,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        backdrop-filter: blur(6px);
+      }
+
+      footer .ad {
+        width: 80%;
+        max-width: 728px;
+        height: 60px;
+        border: 1px dashed rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.08);
+        color: #aaa;
+      }
+
+      @media (max-width: 600px) {
+        header h1 { font-size: 1.8em; }
+        main { padding: 20px 14px 100px; }
+        section { padding: 20px 14px; }
+      }
+    </style>
   </head>
+
   <body>
-    <div id="intro-screen">
+    <header>
       <h1>🌼 Bloomholm</h1>
-    </div>
+      <p>Pequeno lar onde tudo floresce</p>
+    </header>
 
-    <div style="width: 100%; max-width: 960px">
-      <header>
-        <div id="logo">🌼 <span>Bloomholm</span></div>
-        <button id="settingsBtn" aria-label="Configurações">⚙️</button>
-      </header>
-
-      <!-- Modal de Nome do Jogador -->
-      <div id="nameModal" class="name-modal">
-        <div class="name-modal-content">
-          <h2>🌿 Escolha seu nome</h2>
-          <p>Digite o nome do seu personagem para começar a aventura:</p>
-          <input
-            id="playerNameInput"
-            type="text"
-            maxlength="16"
-            placeholder="char"
-          />
-          <div class="modal-actions">
-            <button id="confirmNameBtn">Confirmar</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="game-wrap" role="application" aria-label="Bloomholm game">
-        <div id="left">
-          <div id="hud">
-            <div class="chip">
-              Moedas: <span id="coins" class="score">0</span>
-            </div>
-            <div class="chip">
-              Flores: <span id="flowers" class="score">0</span>
-            </div>
-            <div class="chip">Use WASD / ←↑↓→ ou toque</div>
-          </div>
-
-          <canvas id="canvas" width="640" height="480" tabindex="0"></canvas>
-
-          <div id="controls"><div class="ctrl-btn" data-dir="up">↑</div></div>
-          <div id="controls-bottom">
-            <div class="ctrl-btn" data-dir="left">←</div>
-            <div class="ctrl-btn" data-dir="down">↓</div>
-            <div class="ctrl-btn" data-dir="right">→</div>
-          </div>
-
-          <div
-            style="
-              display: flex;
-              gap: 8px;
-              width: 100%;
-              justify-content: space-between;
-              align-items: center;
-              margin-top: 10px;
-            "
-          >
-            <div id="footer-note">
-              Colete flores e entregue ao mercador (passe sobre ele)
-            </div>
-            <button id="seedBtn">Plantar / Minijogo</button>
-          </div>
-        </div>
-
-        <div id="right">
-          <h3>Inventário</h3>
-          <div id="inventory">
-            <div class="inv-slot" id="slot-0">—</div>
-            <div class="inv-slot" id="slot-1">—</div>
-            <div class="inv-slot" id="slot-2">—</div>
-          </div>
-
-          <h3>Jogadas</h3>
-          <div id="log">Bem-vindo! Mova-se e colete flores.</div>
-
-          <h3>Minijogo</h3>
-          <div id="minigame">
-            <div id="mini-msg">
-              Clique na sequência correta para plantar e regar.
-            </div>
-            <div style="display: flex; gap: 8px; margin-top: 8px">
-              <button id="startMini">Iniciar</button>
-              <button id="closeMini">Fechar</button>
-            </div>
-          </div>
-
-          <div class="adSense">
-            <span id="adSense--content" class="adSense--content">
-              adSense
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== MODAL DE CONFIGURAÇÕES ===== -->
-    <div class="modal" id="settingsModal">
-      <div class="modal-content">
-        <span class="close-btn" id="closeSettings">&times;</span>
-        <h3>⚙️ Configurações</h3>
-        <hr />
-        <button id="openComment" style="margin-top: 10px">
-          💬 Deixe-nos um comentário</button
-        ><br /><br />
-        <button id="openManual">📖 Manual do Jogo</button>
-        <br /><br />
-        <button id="openTechnicalManual">👨‍💻 Manual do software</button>
-      </div>
-    </div>
-
-    <!-- ===== MODAL DE COMENTÁRIO ===== -->
-    <div class="modal" id="commentModal">
-      <div class="modal-content">
-        <span class="close-btn" id="closeComment">&times;</span>
-        <h3>💬 Deixe-nos um comentário</h3>
-        <textarea placeholder="Digite seu comentário..."></textarea>
-        <button
-          style="margin-top: 10px"
-          onclick="alert('Comentário enviado! Obrigado 🌸')"
-        >
-          Enviar
-        </button>
-      </div>
-    </div>
-
-    <!-- ===== MODAL DE MANUAL ===== -->
-    <div class="modal" id="manualModal">
-      <div class="modal-content">
-        <span class="close-btn" id="closeManual">&times;</span>
-        <h3>📖 Manual do Jogo</h3>
+    <main>
+      <section>
+        <h2>Bem-vindo ao Jardim Eterno</h2>
         <p>
-          <strong>Objetivo:</strong> Explore o jardim, colete flores e
-          entregue-as ao mercador para ganhar moedas.
+          Cuide do seu jardim, colete flores, negocie com o mercador e desafie
+          minijogos únicos. <br>
+          Bloomholm é um mundo que nunca para de florescer.
         </p>
-        <p><strong>Controles:</strong></p>
-        <ul>
-          <li>Movimente-se com <b>WASD</b> ou setas direcionais.</li>
-          <li>No celular, use os botões de direção.</li>
-          <li>Pressione <b>E</b> ou toque no mercador para entregar flores.</li>
-        </ul>
-        <p>Relaxe, cuide do jardim e veja quantas flores consegue coletar 🌿</p>
-      </div>
-    </div>
+        <a href="/game/" class="cta">🎮 Jogar Agora</a>
+        <div class="ad">[ Espaço para anúncio 728×90 ]</div>
+      </section>
 
-    <script src="./script/index.js"></script>
+      <section>
+        <h2>📖 Guia Rápido</h2>
+        <p>
+          Use <b>WASD</b> ou as <b>setas</b> para se mover, colha flores e leve-as
+          ao mercador para ganhar moedas. Cuidado com os ladrões e explore os minijogos!
+        </p>
+        <!-- <a href="/doc/" class="cta">Ver Manual</a> -->
+        <div class="ad">[ Espaço para anúncio 728×90 ]</div>
+      </section>
+
+      <section>
+        <h2>💬 Comunidade</h2>
+        <p>
+          Compartilhe suas conquistas, descubra segredos e contribua para o
+          crescimento do mundo de Bloomholm. Entre para o nosso Discord e faça parte!
+        </p>
+         <a href="https://www.discord.com" target="_blank" class="cta">Comunidade Discord</a>
+        <div class="ad">[ Anúncio da comunidade / Parceiros ]</div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="ad">[ Anúncio fixo inferior — 728×60 ]</div>
+    </footer>
   </body>
 </html>
