@@ -16,6 +16,53 @@ body {
   align-items: center;
   justify-content: center;
 }
+/* ====== Initial Animation ====== */
+#intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--ui-bg);
+  background: linear-gradient(160deg,  var(--muted) 0%, var(--accent) 100%);
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOut 1s ease forwards 4s; /* 4s visível + 1s fade */
+}
+
+#intro-screen h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 4rem;
+  color: var(--accent);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+  letter-spacing: 2px;
+  animation: popIn 1s ease;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 /* ====== AdSense ====== */
 .adSense {
   background: linear-gradient(145deg, #f9fff7, #eef7eb);
