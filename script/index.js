@@ -149,32 +149,58 @@
     }
   }
 
+  /* ---------- desenho do jogador + chapéus ---------- */
+
   function drawPlayer(tx, ty) {
     const sx = tx * TILE + TILE / 2,
       sy = ty * TILE + TILE / 2;
+
+    // sombra
     ctx.fillStyle = "rgba(0,0,0,0.12)";
     ctx.beginPath();
     ctx.ellipse(sx, sy + 12, 14, 6, 0, 0, Math.PI * 2);
     ctx.fill();
 
+    // corpo
     ctx.fillStyle = player.color;
     ctx.fillRect(sx - 8, sy - 12, 16, 18);
+
+    // rosto
     ctx.fillStyle = "#fee6c4";
     ctx.fillRect(sx - 6, sy - 24, 12, 12);
+
+    // olhos
     ctx.fillStyle = "#222";
     ctx.fillRect(sx - 3, sy - 20, 2, 2);
     ctx.fillRect(sx + 1, sy - 20, 2, 2);
 
+    // CHAPÉUS
     if (player.hat === 1) {
+      // 🎩 Chapéu vermelho (clássico)
       ctx.fillStyle = "#d9534f";
       ctx.fillRect(sx - 7, sy - 26, 14, 4);
     } else if (player.hat === 2) {
+      // 🎩 Chapéu azul (pontudo)
       ctx.fillStyle = "#3b83bd";
       ctx.beginPath();
       ctx.moveTo(sx - 8, sy - 25);
       ctx.lineTo(sx, sy - 32);
       ctx.lineTo(sx + 8, sy - 25);
       ctx.fill();
+    } else if (player.hat === 3) {
+      // 🎩 Chapéu verde (novo modelo — aba curva estilo aventureiro)
+      ctx.fillStyle = "#2e8b57";
+      ctx.beginPath();
+      ctx.moveTo(sx - 9, sy - 27);
+      ctx.lineTo(sx + 9, sy - 27);
+      ctx.lineTo(sx + 6, sy - 31);
+      ctx.lineTo(sx - 6, sy - 31);
+      ctx.closePath();
+      ctx.fill();
+
+      // pequeno detalhe dourado na lateral
+      ctx.fillStyle = "#d4af37";
+      ctx.fillRect(sx + 4, sy - 30, 2, 2);
     }
   }
 
@@ -207,7 +233,6 @@
   }
 
   /* desenha nomes dos personagens */
-
   function drawNames() {
     ctx.font = "bold 13px 'Inter', sans-serif";
     ctx.textAlign = "center";
@@ -506,8 +531,9 @@
     if (typeof updateUI === "function") updateUI();
   }
 
-  /* ---------- inventário / chapéu ---------- */
+  /* ---------- inventário / chapéus colecionáveis ---------- */
   function giveCosmetic() {
+    // encontra o primeiro slot vazio
     let found = null;
     for (let i = 0; i < 3; i++) {
       const el = document.getElementById("slot-" + i);
@@ -516,16 +542,48 @@
         break;
       }
     }
-    if (found) {
-      found.textContent = "Chapéu";
-      found.addEventListener("click", () => {
-        player.hat = (player.hat + 1) % 3;
-        pushLog("Trocou chapéu.");
-      });
-      pushLog("Chapéu adicionado ao inventário!");
-    } else {
+
+    if (!found) {
       pushLog("Inventário cheio.");
+      return;
     }
+
+    // determina qual chapéu ainda não foi ganho
+    const ownedHats = Array.from({ length: 3 }, (_, i) => {
+      const el = document.getElementById("slot-" + i);
+      return el ? el.dataset.hatType : null;
+    });
+
+    let hatType = 1;
+    if (!ownedHats.includes("1")) hatType = 1;
+    else if (!ownedHats.includes("2")) hatType = 2;
+    else if (!ownedHats.includes("3")) hatType = 3;
+
+    // define nome e estilo conforme o tipo
+    let hatName = "";
+    switch (hatType) {
+      case 1:
+        hatName = "Chapéu vermelho";
+        break;
+      case 2:
+        hatName = "Chapéu azul";
+        break;
+      case 3:
+        hatName = "Chapéu verde";
+        break;
+    }
+
+    // adiciona ao inventário
+    found.textContent = hatName;
+    found.dataset.hatType = hatType;
+
+    // define ação de clique para equipar
+    found.onclick = () => {
+      player.hat = hatType;
+      pushLog(`Equipou ${hatName}.`);
+    };
+
+    pushLog(`${hatName} adicionado ao inventário!`);
   }
 
   function clearAroundMerchant() {
@@ -667,18 +725,20 @@
     }
   }
 
-  /**
-   * Quando o jogador é pego.
-   */
+  /** Quando o jogador é pego. */
   function handlePlayerCaught() {
     coins = 0;
     flowers = 0;
     player.hat = 0;
 
-    // limpa inventário
+    // limpa completamente os slots de inventário
     for (let i = 0; i < 3; i++) {
       const slot = document.getElementById("slot-" + i);
-      if (slot) slot.textContent = "—";
+      if (slot) {
+        slot.textContent = "—"; // remove o texto
+        delete slot.dataset.hatType; // remove referência de tipo
+        slot.onclick = null; // remove ação de clique
+      }
     }
 
     thieves = [];
