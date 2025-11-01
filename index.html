@@ -13,14 +13,12 @@
         --panel: rgba(255, 255, 255, 0.85);
         --dark: #1e261c;
         --txt: #e5f1e0;
-        --glow: 0 0 10px rgba(106,168,79,0.6);
+        --glow: 0 0 10px rgba(106, 168, 79, 0.6);
         font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
           "Helvetica Neue", Arial;
       }
 
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
 
       body {
         margin: 0;
@@ -38,9 +36,9 @@
         text-align: center;
         padding: 20px 10px;
         background: rgba(50, 70, 45, 0.5);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(6px);
-        box-shadow: inset 0 -2px 8px rgba(0,0,0,0.3);
+        box-shadow: inset 0 -2px 8px rgba(0, 0, 0, 0.3);
       }
 
       header h1 {
@@ -68,21 +66,21 @@
 
       section {
         background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255,255,255,0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 12px;
         padding: 24px;
         width: 100%;
-        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        transition: transform .2s ease, box-shadow .2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
       section:hover {
         transform: translateY(-4px);
-        box-shadow: 0 0 25px rgba(106,168,79,0.4);
+        box-shadow: 0 0 25px rgba(106, 168, 79, 0.4);
       }
 
       h2 {
@@ -94,9 +92,9 @@
 
       p {
         color: #c7d9c0;
-        line-height: 1.5;
+        line-height: 1.6;
         font-size: 1em;
-        max-width: 600px;
+        max-width: 640px;
       }
 
       a.cta {
@@ -108,13 +106,13 @@
         font-weight: bold;
         padding: 12px 28px;
         border-radius: 10px;
-        box-shadow: 0 0 20px rgba(106,168,79,0.5);
+        box-shadow: 0 0 20px rgba(106, 168, 79, 0.5);
         transition: transform 0.15s ease, box-shadow 0.15s ease;
       }
 
       a.cta:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 30px rgba(138,210,102,0.8);
+        box-shadow: 0 0 30px rgba(138, 210, 102, 0.8);
       }
 
       .ad {
@@ -122,7 +120,7 @@
         height: 90px;
         margin-top: 16px;
         background: rgba(255, 255, 255, 0.07);
-        border: 1px dashed rgba(255,255,255,0.1);
+        border: 1px dashed rgba(255, 255, 255, 0.1);
         border-radius: 8px;
         display: flex;
         align-items: center;
@@ -138,7 +136,7 @@
         right: 0;
         height: 70px;
         background: rgba(0, 0, 0, 0.65);
-        border-top: 1px solid rgba(255,255,255,0.08);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -150,15 +148,57 @@
         width: 80%;
         max-width: 728px;
         height: 60px;
-        border: 1px dashed rgba(255,255,255,0.1);
-        background: rgba(255,255,255,0.08);
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.08);
         color: #aaa;
+      }
+
+      /* === CTA FIXO JOYSTICK === */
+      .cta-joystick {
+        position: fixed;
+        right: 20px;
+        bottom: 100px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #7fd15a, #4c7a39);
+        box-shadow: 0 0 25px rgba(106, 168, 79, 0.7), inset 0 0 10px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 28px;
+        text-decoration: none;
+        z-index: 9999;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta-joystick:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 40px rgba(140, 220, 100, 0.9);
+      }
+
+      .cta-joystick::after {
+        content: "";
+        position: absolute;
+        inset: -8px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(106,168,79,0.2) 0%, transparent 60%);
+        animation: pulse 2s infinite;
+        z-index: -1;
+      }
+
+      @keyframes pulse {
+        0% { transform: scale(0.95); opacity: 0.7; }
+        50% { transform: scale(1.1); opacity: 0.4; }
+        100% { transform: scale(0.95); opacity: 0.7; }
       }
 
       @media (max-width: 600px) {
         header h1 { font-size: 1.8em; }
         main { padding: 20px 14px 100px; }
         section { padding: 20px 14px; }
+        .cta-joystick { right: 16px; bottom: 90px; width: 60px; height: 60px; font-size: 24px; }
       }
     </style>
   </head>
@@ -173,11 +213,26 @@
       <section>
         <h2>Bem-vindo ao Jardim Eterno</h2>
         <p>
-          Cuide do seu jardim, colete flores, negocie com o mercador e desafie
-          minijogos únicos. <br>
-          Bloomholm é um mundo que nunca para de florescer.
+          <b>Bloomholm</b> é um jogo casual e relaxante em <b>2D</b>, inspirado na
+          simplicidade encantadora dos jogos das décadas de <b>80 e 90</b>.  
+          Com visual pixelado e jogabilidade leve, ele foi criado para oferecer uma
+          experiência tranquila, nostálgica e atemporal.
         </p>
-        <a href="/game/" class="cta">🎮 Jogar Agora</a>
+        <p>
+          Aqui, o jogador assume o papel de um jardineiro em um pequeno refúgio natural,
+          cercado por árvores, flores e personagens únicos.  
+          O mundo é simples, mas vivo — e se transforma mesmo quando você não está jogando.
+        </p>
+        <p>
+          Caminhe, colha flores, troque com o mercador, conquiste moedas e participe de
+          minijogos divertidos. Tudo em um ritmo calmo, sem pressa, ideal para quem busca
+          alguns minutos de paz e diversão no navegador.
+        </p>
+        <p>
+          <em>Bloomholm</em> é uma homenagem aos clássicos: um jogo pequeno em tamanho, mas
+          grande em atmosfera — um lar acolhedor onde tudo floresce, todos os dias.
+        </p>
+        <a href="/game/" class="cta">🎮 Entrar em Bloomholm</a>
         <div class="ad">[ Espaço para anúncio 728×90 ]</div>
       </section>
 
@@ -187,7 +242,6 @@
           Use <b>WASD</b> ou as <b>setas</b> para se mover, colha flores e leve-as
           ao mercador para ganhar moedas. Cuidado com os ladrões e explore os minijogos!
         </p>
-        <!-- <a href="/doc/" class="cta">Ver Manual</a> -->
         <div class="ad">[ Espaço para anúncio 728×90 ]</div>
       </section>
 
@@ -197,7 +251,7 @@
           Compartilhe suas conquistas, descubra segredos e contribua para o
           crescimento do mundo de Bloomholm. Entre para o nosso Discord e faça parte!
         </p>
-         <a href="https://www.discord.com" target="_blank" class="cta">Comunidade Discord</a>
+        <a href="https://www.discord.com" target="_blank" class="cta">Comunidade Discord</a>
         <div class="ad">[ Anúncio da comunidade / Parceiros ]</div>
       </section>
     </main>
@@ -205,5 +259,8 @@
     <footer>
       <div class="ad">[ Anúncio fixo inferior — 728×60 ]</div>
     </footer>
+
+    <!-- CTA FIXO DE JOYSTICK -->
+    <a href="/game/" class="cta-joystick" title="Jogar Bloomholm" aria-label="Jogar Bloomholm">🕹️</a>
   </body>
 </html>
