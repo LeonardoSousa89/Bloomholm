@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
@@ -18,7 +18,9 @@
           "Helvetica Neue", Arial;
       }
 
-      * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
 
       body {
         margin: 0;
@@ -162,7 +164,8 @@
         height: 70px;
         border-radius: 50%;
         background: radial-gradient(circle at 30% 30%, #7fd15a, #4c7a39);
-        box-shadow: 0 0 25px rgba(106, 168, 79, 0.7), inset 0 0 10px rgba(0,0,0,0.3);
+        box-shadow: 0 0 25px rgba(106, 168, 79, 0.7),
+          inset 0 0 10px rgba(0, 0, 0, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -183,22 +186,35 @@
         position: absolute;
         inset: -8px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(106,168,79,0.2) 0%, transparent 60%);
+        background: radial-gradient(
+          circle,
+          rgba(106, 168, 79, 0.2) 0%,
+          transparent 60%
+        );
         animation: pulse 2s infinite;
         z-index: -1;
       }
 
       @keyframes pulse {
-        0% { transform: scale(0.95); opacity: 0.7; }
-        50% { transform: scale(1.1); opacity: 0.4; }
-        100% { transform: scale(0.95); opacity: 0.7; }
+        0% {
+          transform: scale(0.95);
+          opacity: 0.7;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.4;
+        }
+        100% {
+          transform: scale(0.95);
+          opacity: 0.7;
+        }
       }
 
       /* === MODAL DE VERIFICAÇÃO === */
       .modal {
         position: fixed;
         inset: 0;
-        background: rgba(0,0,0,0.85);
+        background: rgba(0, 0, 0, 0.85);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -207,8 +223,12 @@
       }
 
       @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       .modal-content {
@@ -223,8 +243,14 @@
       }
 
       @keyframes pop {
-        from { transform: scale(0.9); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
       }
 
       .modal-content h3 {
@@ -257,10 +283,22 @@
       }
 
       @media (max-width: 600px) {
-        header h1 { font-size: 1.8em; }
-        main { padding: 20px 14px 100px; }
-        section { padding: 20px 14px; }
-        .cta-joystick { right: 16px; bottom: 90px; width: 60px; height: 60px; font-size: 24px; }
+        header h1 {
+          font-size: 1.8em;
+        }
+        main {
+          padding: 20px 14px 100px;
+        }
+        section {
+          padding: 20px 14px;
+        }
+        .cta-joystick {
+          right: 16px;
+          bottom: 90px;
+          width: 60px;
+          height: 60px;
+          font-size: 24px;
+        }
       }
     </style>
   </head>
@@ -284,24 +322,26 @@
       <section>
         <h2>Bem-vindo ao Jardim Eterno</h2>
         <p>
-          <b>Bloomholm</b> é um jogo casual e relaxante em <b>2D</b>, inspirado na
-          simplicidade encantadora dos jogos das décadas de <b>80 e 90</b>.  
-          Com visual pixelado e jogabilidade leve, ele foi criado para oferecer uma
-          experiência tranquila, nostálgica e atemporal.
+          <b>Bloomholm</b> é um jogo casual e relaxante em <b>2D</b>, inspirado
+          na simplicidade encantadora dos jogos das décadas de <b>80 e 90</b>.
+          Com visual pixelado e jogabilidade leve, ele foi criado para oferecer
+          uma experiência tranquila, nostálgica e atemporal.
         </p>
         <p>
-          Aqui, o jogador assume o papel de um jardineiro em um pequeno refúgio natural,
-          cercado por árvores, flores e personagens únicos.  
-          O mundo é simples, mas vivo — e se transforma mesmo quando você não está jogando.
+          Aqui, o jogador assume o papel de um jardineiro em um pequeno refúgio
+          natural, cercado por árvores, flores e personagens únicos. O mundo é
+          simples, mas vivo — e se transforma mesmo quando você não está
+          jogando.
         </p>
         <p>
-          Caminhe, colha flores, troque com o mercador, conquiste moedas e participe de
-          minijogos divertidos. Tudo em um ritmo calmo, sem pressa, ideal para quem busca
-          alguns minutos de paz e diversão no navegador.
+          Caminhe, colha flores, troque com o mercador, conquiste moedas e
+          participe de minijogos divertidos. Tudo em um ritmo calmo, sem pressa,
+          ideal para quem busca alguns minutos de paz e diversão no navegador.
         </p>
         <p>
-          <em>Bloomholm</em> é uma homenagem aos clássicos: um jogo pequeno em tamanho, mas
-          grande em atmosfera — um lar acolhedor onde tudo floresce, todos os dias.
+          <em>Bloomholm</em> é uma homenagem aos clássicos: um jogo pequeno em
+          tamanho, mas grande em atmosfera — um lar acolhedor onde tudo
+          floresce, todos os dias.
         </p>
         <a href="/game/" class="cta">🎮 Entrar em Bloomholm</a>
         <div class="ad">[ Espaço para anúncio 728×90 ]</div>
@@ -310,8 +350,9 @@
       <section>
         <h2>📖 Guia Rápido</h2>
         <p>
-          Use <b>WASD</b> ou as <b>setas</b> para se mover, colha flores e leve-as
-          ao mercador para ganhar moedas. Cuidado com os ladrões e explore os minijogos!
+          Use <b>WASD</b> ou as <b>setas</b> para se mover, colha flores e
+          leve-as ao mercador para ganhar moedas. Cuidado com os ladrões e
+          explore os minijogos!
         </p>
         <div class="ad">[ Espaço para anúncio 728×90 ]</div>
       </section>
@@ -320,9 +361,25 @@
         <h2>💬 Comunidade</h2>
         <p>
           Compartilhe suas conquistas, descubra segredos e contribua para o
-          crescimento do mundo de Bloomholm. Entre para o nosso Discord e faça parte desta comunidade!
+          crescimento do mundo de Bloomholm. Entre para o nosso Discord e faça
+          parte desta comunidade!
         </p>
-        <a href="https://www.discord.com" target="_blank" class="cta">Comunidade Discord</a>
+        <a href="https://discord.gg/QsJ3eX7q" target="_blank" class="cta"
+          >Comunidade Discord</a
+        >
+        <div class="ad">[ Espaço para anúncio 728×90 ]</div>
+      </section>
+
+      <section>
+        <h2>👨‍💻 Fale Com o Programador</h2>
+        <p>
+          Gostaria de falar com o programador? O jardineiro de código por trás
+          do Jardim Eterno! 🌼 Compartilhe suas ideias, sugestões ou bugs, e
+          ajude o jogo a florescer com novas aventuras e melhorias. 🎮✨
+        </p>
+        <a href="https://leonardosousa.dev.br" target="_blank" class="cta"
+          >Fale com o programador</a
+        >
         <div class="ad">[ Espaço para anúncio 728×90 ]</div>
       </section>
     </main>
@@ -332,7 +389,13 @@
     </footer>
 
     <!-- CTA FIXO DE JOYSTICK -->
-    <a href="/game/" class="cta-joystick" title="Jogar Bloomholm" aria-label="Jogar Bloomholm">🕹️</a>
+    <a
+      href="/game/"
+      class="cta-joystick"
+      title="Jogar Bloomholm"
+      aria-label="Jogar Bloomholm"
+      >🕹️</a
+    >
 
     <script>
       const modal = document.getElementById("accessModal");
@@ -351,12 +414,14 @@
           document.body.style.overflow = "auto";
         });
         document.getElementById("btnDecline").addEventListener("click", () => {
-          modalContent.innerHTML = "<h3>Acesso negado ❌<br>Você precisa aceitar os termos para continuar.</h3>";
+          modalContent.innerHTML =
+            "<h3>Acesso negado ❌<br>Você precisa aceitar os termos para continuar.</h3>";
         });
       });
 
       document.getElementById("btnNo").addEventListener("click", () => {
-        modalContent.innerHTML = "<h3>Acesso negado ❌<br>Somente maiores de 12 anos podem acessar.</h3>";
+        modalContent.innerHTML =
+          "<h3>Acesso negado ❌<br>Somente maiores de 12 anos podem acessar.</h3>";
       });
     </script>
   </body>
